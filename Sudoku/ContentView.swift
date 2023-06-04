@@ -8,60 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isShowingSheet = false
+    
     var body: some View {
-        VStack {
-            
-            Text("Sudoku :)")
-                .bold()
-                .font(.title)
-                .padding()
-            
-            Button("Play") {
-                isShowingSheet = true
-//                print(isShowingSheet)
-            }
-            .buttonStyle(.bordered)
-            .foregroundColor(.white)
-            .background(.indigo)
-            .clipShape(Capsule())
-            .sheet(isPresented: $isShowingSheet) {
-                
-                VStack {
-                    Text("Choose difficulty:")
-                        .bold()
-                        .font(.title)
-                        .padding()
-                    
-                    Button("Easy") {
-                        
-                    }
-                    .foregroundColor(.white)
-                    .background(.indigo)
-                    .clipShape(Capsule())
-                    
-                    Button("Medium") {
-                        
-                    }
-                    .foregroundColor(.white)
-                    .background(.indigo)
-                    .clipShape(Capsule())
-                    
-                    Button("Hard") {
-                        
-                    }
-                    .foregroundColor(.white)
-                    .background(.indigo)
-                    .clipShape(Capsule())
+        NavigationView {
+            VStack {
+                Text("Sudoku :)")
+                    .bold()
+                    .font(.largeTitle)
+                    .padding()
+                NavigationLink(destination: ModeView()) {
+                    Text("Play")
                 }
                 .buttonStyle(.bordered)
-                .presentationDetents([.fraction(0.3)])
-                
+                .foregroundColor(.white)
+                .background(.indigo)
+                .clipShape(Capsule())
             }
+            .fontDesign(.serif)
         }
-        .fontDesign(.serif)
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -69,3 +34,34 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct ModeView: View {
+    
+    @State private var mode = ""
+    let modes: [String] = ["Easy", "Medium", "Hard"]
+    
+    var body: some View {
+        VStack{
+            Text("Choose difficulty:")
+                .bold()
+                .font(.largeTitle)
+                .padding()
+            ForEach(modes, id: \.self) { mode in
+                NavigationLink(destination: SudokuBoardView(mode: $mode)) {
+                    Text(mode)
+                }
+                .simultaneousGesture(TapGesture().onEnded{
+                    self.mode = mode
+                })
+            }
+            .buttonStyle(.bordered)
+            .foregroundColor(.white)
+            .background(.indigo)
+            .clipShape(Capsule())
+                
+        }
+        .fontDesign(.serif)
+    }
+}
+
+
