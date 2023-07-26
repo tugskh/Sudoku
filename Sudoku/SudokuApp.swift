@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct SudokuApp: App {
+    @StateObject var dm = Sudoku()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(dm)
         }
     }
 }

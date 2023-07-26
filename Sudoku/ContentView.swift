@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var dm: Sudoku
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -31,14 +33,15 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(Sudoku())
     }
 }
 
 struct ModeView: View {
     
-    @State private var mode = ""
-    let modes: [String] = ["Easy", "Medium", "Hard"]
+    @Environment(\.presentationMode) var presentation
+    @EnvironmentObject var dm: Sudoku
+    
     
     var body: some View {
         VStack{
@@ -46,12 +49,17 @@ struct ModeView: View {
                 .bold()
                 .font(.largeTitle)
                 .padding()
-            ForEach(modes, id: \.self) { mode in
-                NavigationLink(destination: SudokuBoardView(mode: $mode)) {
-                    Text(mode)
+            
+            ForEach(modes.allCases, id: \.id) { mode in
+                NavigationLink(destination: GameView()) {
+                    Text(mode.rawValue.capitalized)
+//                    Button(mode.rawValue.capitalized) {
+//                        dm.mode = mode
+//                    }
                 }
                 .simultaneousGesture(TapGesture().onEnded{
-                    self.mode = mode
+                    dm.mode = mode
+                    dm.startGame()
                 })
             }
             .buttonStyle(.bordered)
@@ -60,7 +68,17 @@ struct ModeView: View {
             .clipShape(Capsule())
                 
         }
+        .navigationBarBackButtonHidden(true)
         .fontDesign(.serif)
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                Image(systemName: "chevron.backward")
+                    .foregroundColor(.indigo)
+                    .onTapGesture {
+                        self.presentation.wrappedValue.dismiss()
+                    }
+            }
+        }
     }
 }
 
