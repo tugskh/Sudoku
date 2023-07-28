@@ -76,6 +76,29 @@ class Sudoku: ObservableObject {
         return cells[row][col]
     }
     
+    func setActiveCell(row: Int, col: Int) {
+        if isEmpty(row: row, col: col) && !isCorrect(row: row, col: col) {
+            activeCell = [row, col]
+        }
+    }
+    
+    func cellColor(row: Int, col: Int) -> Color{
+        if(!isCorrect(row: row, col: col) && valueAt(row: row, col: col) != 0) {
+            return Color.red.opacity(0.5)
+        } else {
+            return Color.clear
+        }
+    }
+    
+}
+
+struct sudoku: Codable, Identifiable {
+    
+    let id: Int
+    let puzzle: String
+    let solution: String
+    
+    static let example = sudoku(id: 1, puzzle: "800930002009000040702100960200000090060000070070006005027008406030000500500062008", solution: "846937152319625847752184963285713694463859271971246385127598436638471529594362718")
 }
 
 

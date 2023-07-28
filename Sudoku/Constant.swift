@@ -14,6 +14,10 @@ enum modes: String, CaseIterable {
     var id: String {return self.rawValue}
 }
 
+enum cellStyle {
+    case system, incorrect, correct
+}
+
 enum Screen {
     static let size: CGRect = UIScreen.main.bounds
     static let width: CGFloat = UIScreen.main.bounds.width

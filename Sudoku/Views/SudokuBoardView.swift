@@ -14,20 +14,30 @@ struct SudokuBoardView: View {
     
     var body: some View {
         
-        VStack {
+        ZStack {
+            
+            VStack(spacing: 0) {
+                ForEach(0 ..< 3) { _ in
+                    HStack(spacing: 0) {
+                        ForEach(0 ..< 3) { col in
+                            Rectangle()
+                                .fill(.clear)
+                                .border(.indigo, width: 1.7)
+                        }
+                    }
+                }
+            }.border(.indigo, width: 2)
+            
             VStack(spacing: 0) {
                 ForEach(0 ..< 9) { row in
                     HStack(spacing: 0) {
                         ForEach(0 ..< 9) { col in
                             if(sudoku.activeCell == [row, col]) {
-                                SudokuCell(number: sudoku.valueAt(row: row, col: col))
-                                    .border(.black, width:1.2)
+                                SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col)).border(.black, width: 2)
                             } else {
-                                SudokuCell(number: sudoku.valueAt(row: row, col: col))
+                                SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col))
                                     .onTapGesture {
-                                        if(sudoku.isEmpty(row: row, col: col) && !sudoku.isCorrect(row: row, col: col)) {
-                                            sudoku.activeCell = [row,col]
-                                        }
+                                        sudoku.setActiveCell(row: row, col: col)
                                         print(sudoku.activeCell)
                                     }
                             }
@@ -35,9 +45,10 @@ struct SudokuBoardView: View {
                     }
                 }
             }
-            .aspectRatio(1.0, contentMode: .fit)
-            .padding()
+            
         }
+        .aspectRatio(1.0, contentMode: .fit)
+        .padding()
     }
 }
 
@@ -47,22 +58,3 @@ struct SudokuBoardView_Previews: PreviewProvider {
     }
 }
 
-struct SudokuCell: View {
-    
-    let number: Int?
-    
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.clear)
-//                .frame(width: 30, height: 30)
-                .border(.indigo)
-            
-            if number != 0 {
-                Text("\(number!)")
-            }
-        }
-        .contentShape(Rectangle())
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-}

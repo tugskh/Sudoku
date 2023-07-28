@@ -24,6 +24,7 @@ struct GameView: View {
             
 //            SudokuBoardView(sudoku: dm)
             SudokuBoardView().environmentObject(dm)
+            KeyPadView().environmentObject(dm)
         }
     }
 }
