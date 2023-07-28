@@ -12,6 +12,7 @@ struct GameView: View {
     @EnvironmentObject var dm: Sudoku
     @State private var pauseMenu = false
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationView() {
@@ -48,7 +49,7 @@ struct GameView: View {
                             pauseMenu = true
                         } label: {
                             Image(systemName: "pause.fill")
-                                .foregroundColor(.black)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                         
                     }
@@ -57,7 +58,7 @@ struct GameView: View {
                 if(pauseMenu) {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .black : .white)
 //                            .padding()
                         VStack {
                             Text("Paused").bold().font(.title2).padding()

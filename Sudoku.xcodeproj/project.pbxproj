@@ -13,6 +13,7 @@
 		8069C21B2A2A5C2E00E782C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8069C21A2A2A5C2E00E782C7 /* Assets.xcassets */; };
 		8069C21E2A2A5C2E00E782C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8069C21D2A2A5C2E00E782C7 /* Preview Assets.xcassets */; };
 		8069C2252A2A873B00E782C7 /* SudokuBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069C2242A2A873B00E782C7 /* SudokuBoardView.swift */; };
+		8095958F2A74785C00DE2DDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8095958E2A74785C00DE2DDD /* Launch Screen.storyboard */; };
 		809CFB832A69C62600D348BE /* Sudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809CFB822A69C62600D348BE /* Sudoku.swift */; };
 		809CFB892A69D04B00D348BE /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809CFB882A69D04B00D348BE /* String+Extension.swift */; };
 		809CFB8F2A6AF5A500D348BE /* easy.json in Resources */ = {isa = PBXBuildFile; fileRef = 809CFB8A2A6ABB5600D348BE /* easy.json */; };
@@ -31,6 +32,7 @@
 		8069C21A2A2A5C2E00E782C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8069C21D2A2A5C2E00E782C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8069C2242A2A873B00E782C7 /* SudokuBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBoardView.swift; sourceTree = "<group>"; };
+		8095958E2A74785C00DE2DDD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		809CFB822A69C62600D348BE /* Sudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sudoku.swift; sourceTree = "<group>"; };
 		809CFB882A69D04B00D348BE /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		809CFB8A2A6ABB5600D348BE /* easy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = easy.json; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		8069C20A2A2A5C2D00E782C7 = {
 			isa = PBXGroup;
 			children = (
+				8095958E2A74785C00DE2DDD /* Launch Screen.storyboard */,
 				8069C2152A2A5C2D00E782C7 /* Sudoku */,
 				8069C2142A2A5C2D00E782C7 /* Products */,
 			);
@@ -187,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8095958F2A74785C00DE2DDD /* Launch Screen.storyboard in Resources */,
 				8069C21E2A2A5C2E00E782C7 /* Preview Assets.xcassets in Resources */,
 				8069C21B2A2A5C2E00E782C7 /* Assets.xcassets in Resources */,
 				809CFB8F2A6AF5A500D348BE /* easy.json in Resources */,
@@ -336,17 +340,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				DEVELOPMENT_TEAM = 23V4H8MSSL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Sudoku;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -354,9 +361,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tugskh.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -365,17 +375,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				DEVELOPMENT_TEAM = 23V4H8MSSL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Sudoku;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,9 +396,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.tugskh.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
