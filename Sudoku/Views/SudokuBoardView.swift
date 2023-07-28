@@ -26,7 +26,8 @@ struct SudokuBoardView: View {
                         }
                     }
                 }
-            }.border(.indigo, width: 2)
+            }
+                .border(.indigo, width: 3)
             
             VStack(spacing: 0) {
                 ForEach(0 ..< 9) { row in
@@ -34,8 +35,14 @@ struct SudokuBoardView: View {
                         ForEach(0 ..< 9) { col in
                             if(sudoku.activeCell == [row, col]) {
                                 SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col)).border(.black, width: 2)
+                                    .onTapGesture {
+                                        if(!sudoku.isCorrect(row: row, col: col)) {
+                                            sudoku.setActiveCell(row: row, col: col)
+                                            print(sudoku.activeCell)
+                                        }
+                                    }
                             } else {
-                                SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col))
+                                SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col)).bold(sudoku.systemCell(row: row, col: col))
                                     .onTapGesture {
                                         sudoku.setActiveCell(row: row, col: col)
                                         print(sudoku.activeCell)

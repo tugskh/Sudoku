@@ -11,12 +11,20 @@ class Sudoku: ObservableObject {
     
     @Published var cells: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     @Published var activeCell: [Int] = []
+    @Published var wrong_try = 0
+    var system_cells: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     var mode: modes?
-    var solutions: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
+    var solution: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     var id = 0
+    var gameOver: Bool = false
     
+    init() {
+        startGame()
+    }
     
     func startGame() {
+        gameOver = false
+        wrong_try = 0
         if activeCell != [] {
             activeCell = []
         }
@@ -44,11 +52,12 @@ class Sudoku: ObservableObject {
             print(id)
             for row in 0...8 {
                 for col in 0...8 {
-                    cells[row][col] = Int(sudoku.puzzle[row*9+col])!
-                    solutions[row][col] = Int(sudoku.solution[row*9+col])!
+                    system_cells[row][col] = Int(sudoku.puzzle[row*9+col])!
+                    solution[row][col] = Int(sudoku.solution[row*9+col])!
                     //                    print(cells[row][col])
                 }
             }
+            cells = system_cells
         }
 
         
@@ -59,12 +68,18 @@ class Sudoku: ObservableObject {
     }
     
     func isCorrect(row: Int, col: Int) -> Bool {
-        return cells[row][col] == solutions[row][col]
+        return cells[row][col] == solution[row][col]
     }
     
     func enterValue(row: Int, col: Int, value: Int) {
         if isEmpty(row: row, col: col) || !isCorrect(row: row, col: col) {
             cells[row][col] = value
+        }
+        if !isCorrect(row: row, col: col) {
+            wrong_try += 1
+        }
+        if wrong_try == 3 || cells == solution {
+            gameOver = true
         }
     }
     
@@ -77,17 +92,36 @@ class Sudoku: ObservableObject {
     }
     
     func setActiveCell(row: Int, col: Int) {
-        if isEmpty(row: row, col: col) && !isCorrect(row: row, col: col) {
+        if isEmpty(row: row, col: col) || !isCorrect(row: row, col: col) {
             activeCell = [row, col]
         }
     }
     
-    func cellColor(row: Int, col: Int) -> Color{
+    func cellColor(row: Int, col: Int) -> Color {
         if(!isCorrect(row: row, col: col) && valueAt(row: row, col: col) != 0) {
             return Color.red.opacity(0.5)
         } else {
             return Color.clear
         }
+    }
+    
+    func systemCell(row: Int, col: Int) -> Bool {
+        if cells[row][col] == system_cells[row][col] {
+            return true
+        }
+        return false
+    }
+    
+    func countCorrectOccurences(number: Int) -> Int {
+        var count = 0
+        for row in 0...8 {
+            for col in 0...8 {
+                if cells[row][col] == number && isCorrect(row: row, col: col) {
+                    count += 1
+                }
+            }
+        }
+        return count
     }
     
 }

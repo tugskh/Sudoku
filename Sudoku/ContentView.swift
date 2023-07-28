@@ -51,7 +51,7 @@ struct ModeView: View {
                 .padding()
             
             ForEach(modes.allCases, id: \.id) { mode in
-                NavigationLink(destination: GameView()) {
+                NavigationLink(destination: GameView().navigationBarBackButtonHidden()) {
                     Text(mode.rawValue.capitalized)
 //                    Button(mode.rawValue.capitalized) {
 //                        dm.mode = mode
