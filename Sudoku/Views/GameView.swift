@@ -20,8 +20,10 @@ struct GameView: View {
                 VStack() {
                     SudokuBoardView().environmentObject(dm)
                     KeyPadView().environmentObject(dm)
+                        .padding(.bottom)
+                        .padding(.horizontal)
                     Button() {
-                        print("delete")
+//                        print("delete")
                         dm.removeValue(row: dm.activeCell[0], col: dm.activeCell[1])
                     } label: {
                         Image(systemName: "trash")
@@ -41,8 +43,9 @@ struct GameView: View {
                     }
                     ToolbarItem {
                         Text("\(dm.wrong_try)/3")
-                            .font(.headline)
+                            .font(.title2)
                             .fontDesign(.serif)
+                            .bold()
                     }
                     ToolbarItem {
                         Button {
@@ -61,13 +64,14 @@ struct GameView: View {
                             .foregroundColor(colorScheme == .dark ? .black : .white)
 //                            .padding()
                         VStack {
-                            Text("Paused").bold().font(.title2).padding()
+                            Text("Paused").bold().font(.title)
                             Button("Resume") {
                                 pauseMenu = false
                             }
                                 .foregroundColor(.white)
                                 .background(.indigo)
                                 .clipShape(Capsule())
+                                .padding()
                             Button("Restart") {
                                 pauseMenu = false
                                 dm.cells = dm.system_cells
@@ -76,12 +80,14 @@ struct GameView: View {
                             }
                                 .foregroundColor(.white)
                                 .background(.indigo)
+//                                .controlSize(.small)
                                 .clipShape(Capsule())
                             Button("Exit"){
                                 self.dismiss()
                             }
                                 .foregroundColor(.white)
                                 .background(.indigo)
+//                                .controlSize(.small)
                                 .clipShape(Capsule())
                         }
                         .fontDesign(.serif)
@@ -92,7 +98,7 @@ struct GameView: View {
                 if(dm.gameOver) {
                     ZStack {
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .black : .white)
 //                            .padding()
                         VStack {
                             if(dm.wrong_try != 3) {

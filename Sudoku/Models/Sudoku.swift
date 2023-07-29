@@ -9,6 +9,8 @@ import SwiftUI
 
 class Sudoku: ObservableObject {
     
+    
+    @Environment(\.colorScheme) var colorScheme
     @Published var cells: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     @Published var activeCell: [Int] = []
     @Published var wrong_try = 0
@@ -36,9 +38,9 @@ class Sudoku: ObservableObject {
     func populateDefaults() {
         
         var sudokus: [sudoku] = [sudoku]()
-        print("mode", self.mode!)
+//        print("mode", self.mode!)
         let fileName: String = "\(self.mode!)"
-        print("filename", fileName)
+//        print("filename", fileName)
         
         if let jsonURL = Bundle.main.url(forResource: fileName, withExtension: "json") {
             let jsonData = try! Data(contentsOf: jsonURL)
@@ -49,7 +51,7 @@ class Sudoku: ObservableObject {
         
         if let sudoku = sudokus.randomElement() {
             id = sudoku.id
-            print(id)
+//            print(id)
             for row in 0...8 {
                 for col in 0...8 {
                     system_cells[row][col] = Int(sudoku.puzzle[row*9+col])!
@@ -92,17 +94,37 @@ class Sudoku: ObservableObject {
     }
     
     func setActiveCell(row: Int, col: Int) {
-        if isEmpty(row: row, col: col) || !isCorrect(row: row, col: col) {
+//        if isEmpty(row: row, col: col) || !isCorrect(row: row, col: col) {
             activeCell = [row, col]
-        }
+//        }
     }
     
     func cellColor(row: Int, col: Int) -> Color {
-        if(!isCorrect(row: row, col: col) && valueAt(row: row, col: col) != 0) {
-            return Color.red.opacity(0.5)
-        } else {
-            return Color.clear
+        
+        
+        if(activeCell != []) {
+            
+            if(!isCorrect(row: row, col: col) && valueAt(row: row, col: col) != 0) {
+                return Color.red.opacity(0.2)
+            }
+            if(isEmpty(row: activeCell[0], col: activeCell[1])) {
+                if(activeCell[0] == row || activeCell[1] == col) {
+                    return Color.indigo.opacity(0.2)
+                }
+                if(row >= activeCell[0]-activeCell[0]%3 && row < activeCell[0]-activeCell[0]%3+3 && col >= activeCell[1]-activeCell[1]%3 && col < activeCell[1]-activeCell[1]%3+3) {
+                    return Color.indigo.opacity(0.2)
+                }
+            }
+            if(!isEmpty(row: row, col: col) && valueAt(row: row, col: col) == valueAt(row: activeCell[0], col: activeCell[1])) {
+                return Color.indigo.opacity(0.3)
+            }
         }
+        
+//        if(!isCorrect(row: row, col: col) && valueAt(row: row, col: col) != 0) {
+//            return Color.red.opacity(0.2)
+//        }
+        
+        return .clear
     }
     
     func systemCell(row: Int, col: Int) -> Bool {

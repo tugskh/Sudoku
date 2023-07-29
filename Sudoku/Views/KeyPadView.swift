@@ -11,15 +11,11 @@ struct KeyPadView: View {
     
     @EnvironmentObject var dm: Sudoku
     var body: some View {
-        VStack(spacing: 15) {
-            HStack() {
-                ForEach(1 ..< 10) { number in
-                    KeyButtonView(number: number).environmentObject(dm)
-                }
+        HStack() {
+            ForEach(1 ..< 10) { number in
+                KeyButtonView(number: number).environmentObject(dm)
             }
-
         }
-            .padding()
         
     }
 }
@@ -31,20 +27,19 @@ struct KeyButtonView: View {
     
     var body: some View {
         Button {
-            print("button pressed")
+//            print("button pressed")
             if dm.activeCell != [] {
                 dm.enterValue(row: dm.activeCell[0], col: dm.activeCell[1], value: number)
-                print("number entered")
+//                print("number entered")
             }
         } label: {
-            Text("\(number)").bold()
+            Text("\(number) ").bold()
                 .padding(-2)
         }
             .buttonStyle(.bordered)
             .tint(.indigo)
             .cornerRadius(12)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .aspectRatio(1, contentMode: .fit)
+            .frame(maxWidth: 35, maxHeight: 35)
             .disabled(dm.countCorrectOccurences(number: number) == 9)
 
     }
