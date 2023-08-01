@@ -22,17 +22,6 @@ struct GameView: View {
                     KeyPadView().environmentObject(dm)
                         .padding(.bottom)
                         .padding(.horizontal)
-                    Button() {
-//                        print("delete")
-                        dm.removeValue(row: dm.activeCell[0], col: dm.activeCell[1])
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                        .buttonStyle(.bordered)
-                        .tint(.indigo)
-                        .cornerRadius(12)
-                        .controlSize(.regular)
-                        .disabled(!(dm.activeCell != [] && !dm.isCorrect(row: dm.activeCell[0], col: dm.activeCell[1]) && dm.valueAt(row: dm.activeCell[0], col: dm.activeCell[1]) != 0))
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -62,7 +51,6 @@ struct GameView: View {
                     ZStack {
                         Rectangle()
                             .foregroundColor(colorScheme == .dark ? .black : .white)
-//                            .padding()
                         VStack {
                             Text("Paused").bold().font(.title)
                             Button("Resume") {
@@ -99,12 +87,19 @@ struct GameView: View {
                     ZStack {
                         Rectangle()
                             .foregroundColor(colorScheme == .dark ? .black : .white)
-//                            .padding()
                         VStack {
                             if(dm.wrong_try != 3) {
-                                Text("You Won!").bold().font(.title2).padding()
+                                Text("You Won!")
+                                    .bold()
+                                    .font(.title2)
+                                    .padding()
                             } else {
-                                Text("Game Over").bold().font(.title2).padding()
+                                Text("Game Over")
+                                    .transition(.move(edge: .bottom))
+                                    .bold()
+                                    .font(.title2)
+                                    .padding()
+                                    .animation(.easeIn, value: dm.gameOver)
                             }
                             Button("Exit"){
                                 self.dismiss()

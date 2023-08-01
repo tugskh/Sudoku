@@ -13,12 +13,13 @@ class Sudoku: ObservableObject {
     @Environment(\.colorScheme) var colorScheme
     @Published var cells: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     @Published var activeCell: [Int] = []
+    @Published var cellNotes: [[[Int]]] = Array(repeating: Array(repeating: [], count: 9), count: 9)
     @Published var wrong_try = 0
+    var gameOver: Bool = false
     var system_cells: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     var mode: modes?
     var solution: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     var id = 0
-    var gameOver: Bool = false
     
     init() {
         startGame()
@@ -79,9 +80,33 @@ class Sudoku: ObservableObject {
         }
         if !isCorrect(row: row, col: col) {
             wrong_try += 1
+        } else {
+            
+            for r in row-row%3...row-row%3+2 {
+                for c in col-col%3...col-col%3+2 {
+//                    print(r,c)
+                    if(isEmpty(row: r, col: c)){
+//                        print(r,c, cellNotes[r][c])
+                        removeCellNote(row: r, col: c, value: value)
+//                        print(r,c, cellNotes[r][c])
+                    }
+                }
+            }
+            
+            for i in 0...8 {
+                if cellNotes[i][col].contains(value) {
+                    removeCellNote(row: i, col: col, value: value)
+                }
+                if cellNotes[row][i].contains(value) {
+                    removeCellNote(row: row, col: i, value: value)
+                }
+            }
+            
         }
         if wrong_try == 3 || cells == solution {
-            gameOver = true
+            withAnimation(.easeIn(duration: 14)) {
+                gameOver = true
+            }
         }
     }
     
@@ -144,6 +169,20 @@ class Sudoku: ObservableObject {
             }
         }
         return count
+    }
+    
+    func enterCellNote(row: Int, col: Int, value: Int) {
+        if isEmpty(row: row, col: col) || !isCorrect(row: row, col: col) {
+            if(!cellNotes[row][col].contains(value)) {
+                cellNotes[row][col].append(value)
+            }
+        }
+    }
+    
+    func removeCellNote(row: Int, col: Int, value: Int) {
+        if cellNotes[row][col].contains(value) {
+            cellNotes[row][col] = cellNotes[row][col].filter {$0 != value}
+        }
     }
     
 }

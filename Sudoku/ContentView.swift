@@ -60,6 +60,7 @@ struct ModeView: View {
                 .simultaneousGesture(TapGesture().onEnded{
                     dm.mode = mode
                     dm.startGame()
+//                    dm.gameOver = true
                 })
             }
             .buttonStyle(.bordered)

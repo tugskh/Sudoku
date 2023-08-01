@@ -13,6 +13,7 @@
 		8069C21B2A2A5C2E00E782C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8069C21A2A2A5C2E00E782C7 /* Assets.xcassets */; };
 		8069C21E2A2A5C2E00E782C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8069C21D2A2A5C2E00E782C7 /* Preview Assets.xcassets */; };
 		8069C2252A2A873B00E782C7 /* SudokuBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069C2242A2A873B00E782C7 /* SudokuBoardView.swift */; };
+		8080C9812A783F0A00DF8D87 /* CellNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8080C9802A783F0A00DF8D87 /* CellNoteView.swift */; };
 		809CFB832A69C62600D348BE /* Sudoku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809CFB822A69C62600D348BE /* Sudoku.swift */; };
 		809CFB892A69D04B00D348BE /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809CFB882A69D04B00D348BE /* String+Extension.swift */; };
 		809CFB8F2A6AF5A500D348BE /* easy.json in Resources */ = {isa = PBXBuildFile; fileRef = 809CFB8A2A6ABB5600D348BE /* easy.json */; };
@@ -31,6 +32,7 @@
 		8069C21A2A2A5C2E00E782C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8069C21D2A2A5C2E00E782C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8069C2242A2A873B00E782C7 /* SudokuBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBoardView.swift; sourceTree = "<group>"; };
+		8080C9802A783F0A00DF8D87 /* CellNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNoteView.swift; sourceTree = "<group>"; };
 		809CFB822A69C62600D348BE /* Sudoku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sudoku.swift; sourceTree = "<group>"; };
 		809CFB882A69D04B00D348BE /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		809CFB8A2A6ABB5600D348BE /* easy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = easy.json; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				809CFB962A6B0C4700D348BE /* GameView.swift */,
 				8069C2242A2A873B00E782C7 /* SudokuBoardView.swift */,
 				802304A82A71C8E5003F445A /* SudokuCellView.swift */,
+				8080C9802A783F0A00DF8D87 /* CellNoteView.swift */,
 				809CFB982A719A2400D348BE /* KeyPadView.swift */,
 			);
 			path = Views;
@@ -208,6 +211,7 @@
 				8069C2172A2A5C2D00E782C7 /* SudokuApp.swift in Sources */,
 				809CFB832A69C62600D348BE /* Sudoku.swift in Sources */,
 				809CFB892A69D04B00D348BE /* String+Extension.swift in Sources */,
+				8080C9812A783F0A00DF8D87 /* CellNoteView.swift in Sources */,
 				809CFB972A6B0C4700D348BE /* GameView.swift in Sources */,
 				802304A92A71C8E5003F445A /* SudokuCellView.swift in Sources */,
 				8069C2252A2A873B00E782C7 /* SudokuBoardView.swift in Sources */,
@@ -344,6 +348,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Sudoku;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -378,6 +383,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Sudoku;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

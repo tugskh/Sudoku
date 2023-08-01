@@ -17,7 +17,7 @@ struct SudokuBoardView: View {
         ZStack {
             
             VStack(spacing: 0) {
-                ForEach(0 ..< 3) { _ in
+                ForEach(0 ..< 3) { row in
                     HStack(spacing: 0) {
                         ForEach(0 ..< 3) { col in
                             Rectangle()
@@ -33,28 +33,16 @@ struct SudokuBoardView: View {
                 ForEach(0 ..< 9) { row in
                     HStack(spacing: 0) {
                         ForEach(0 ..< 9) { col in
-                            if(sudoku.activeCell == [row, col]) {
-                                SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col)).border(colorScheme == .dark ? .white : .black, width: 2).bold(sudoku.systemCell(row: row, col: col))
-                                    .onTapGesture {
-                                        if(!sudoku.isCorrect(row: row, col: col)) {
-                                            sudoku.setActiveCell(row: row, col: col)
-//                                            print(sudoku.activeCell)
-                                        }
-                                    }
-                            } else {
-                                SudokuCellView(number: sudoku.valueAt(row: row, col: col), color: sudoku.cellColor(row: row, col: col)).bold(sudoku.systemCell(row: row, col: col))
-                                    .onTapGesture {
-                                        sudoku.setActiveCell(row: row, col: col)
-//                                        print(sudoku.activeCell)
-                                    }
-                            }
+                            SudokuCellView(row: row, col: col).environmentObject(sudoku)
                         }
                     }
                 }
             }
             
         }
-        .aspectRatio(1.0, contentMode: .fit)
+        .contentShape(Rectangle())
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(1, contentMode: .fit)
         .padding()
     }
 }
