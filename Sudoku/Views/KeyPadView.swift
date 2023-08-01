@@ -11,6 +11,8 @@ struct KeyPadView: View {
     
     @EnvironmentObject var dm: Sudoku
     @State var noteMode: Bool = false
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         VStack {
             HStack() {
@@ -54,6 +56,7 @@ struct KeyPadView: View {
 struct KeyButtonView: View {
     
     @EnvironmentObject var dm: Sudoku
+    @Environment(\.colorScheme) var colorScheme
     var number: Int
     @Binding var noteMode: Bool
     
@@ -81,10 +84,15 @@ struct KeyButtonView: View {
                 .padding(-2)
         }
             .buttonStyle(.bordered)
-            .tint(noteMode == true ? .black.opacity(0.7) : .indigo)
             .cornerRadius(12)
             .frame(maxWidth: 35, maxHeight: 35)
             .disabled(dm.countCorrectOccurences(number: number) == 9)
+            .ifCondition(noteMode) { button in
+                colorScheme == .dark ? button.tint(.white.opacity(0.7)) : button.tint(.black.opacity(0.7))
+            } else: { button in
+                button.tint(.indigo.opacity(2))
+            }
+
 
     }
 }
@@ -92,5 +100,17 @@ struct KeyButtonView: View {
 struct KeyPadView_Previews: PreviewProvider {
     static var previews: some View {
         KeyPadView().environmentObject(Sudoku())
+    }
+}
+
+
+extension View {
+    @ViewBuilder
+    func ifCondition<TrueContent: View, FalseContent: View>(_ condition: Bool, then trueContent: (Self) -> TrueContent, else falseContent: (Self) -> FalseContent) -> some View {
+        if condition {
+            trueContent(self)
+        } else {
+            falseContent(self)
+        }
     }
 }
